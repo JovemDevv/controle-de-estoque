@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+    <title>Estoque - Padaria</title>
+</head>
+<body>
+    <div class="estoque-container">
+        <!-- Estoque da Padaria (vertical) -->
+        <div class="estoque-padaria">
+            <h2>Estoque da Padaria</h2>
+            <div>
+                <img src="data:image/png;base64,{{ graph_url }}" alt="Gráfico de Estoque">
+            </div>
+            <h4>Carregar Novo Arquivo CSV</h4>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="csv_file" accept=".csv" required>
+                <button type="submit">Carregar CSV</button>
+            </form>
+        </div>
+        
+        <!-- Dados do Estoque (lado a lado) -->
+        <div class="dados-estoque">
+            <h3>Dados de Estoque</h3>
+            <div>
+                <h4>Estoque Atual</h4>
+                {{ table|safe }}
+                
+                <h4>Vendas por Dia</h4>
+                {{ daily_sales_table|safe }}
+
+                <h4>Vendas por Semana</h4>
+                {{ weekly_sales_table|safe }}
+
+                <h4>Vendas por Mês</h4>
+                {{ monthly_sales_table|safe }}
+
+                <!-- Gráfico de Vendas Totais por Mês -->
+                <h4>Vendas Totais por Mês</h4>
+                <div>
+                    <img src="data:image/png;base64,{{ monthly_sales_graph_url }}" alt="Gráfico de Vendas Totais">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
