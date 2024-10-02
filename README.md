@@ -1,4 +1,5 @@
 # Sistema de Estoque da Padaria
+**version: 1.0***
 
 ## Descrição
 
